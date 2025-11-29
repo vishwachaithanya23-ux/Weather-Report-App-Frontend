@@ -1,0 +1,25 @@
+<div class="search-wrapper">
+  <div class="search-box">
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Enter city..." 
+      [(ngModel)]="query" 
+      (input)="onInput()" 
+      (blur)="blurHandler()"
+    >
+    <button class="search-btn" (click)="manualSearch()">Search</button>
+    <span class="search-loader" *ngIf="loading"></span>
+  </div>
+
+  <ul class="dropdown" *ngIf="showDropdown && results.length">
+    <li class="dropdown-item" *ngFor="let city of results" (click)="selectCity(city)">
+      {{ city.name }}
+      <span class="country">{{ city.country }}</span>
+    </li>
+  </ul>
+
+  <div class="no-results" *ngIf="showDropdown && !results.length && !loading">
+    No results found.
+  </div>
+</div>

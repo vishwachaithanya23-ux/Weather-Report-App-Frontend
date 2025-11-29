@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+/* ensure leaflet maps render correctly */
+.leaflet-container { height: 100%; width:100%; }
+
+/* small helper for dark body background */
+body.dark { background: #0b1220; color: #e6eef8; }
+
+/* small utility */
+.hidden { display:none; }

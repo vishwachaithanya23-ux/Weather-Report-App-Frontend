@@ -1,0 +1,75 @@
+<div class="current-weather-wrap" *ngIf="currentWeather; else loadingTpl">
+  <h3 class="title">🌡️ Current Weather - {{ currentWeather.name }}, {{ currentWeather.sys.country }}</h3>
+
+  <div class="weather-grid">
+    <!-- Weather Main -->
+    <div class="weather-card">
+      <div class="card-key">Condition</div>
+      <div class="card-value">
+        {{ currentWeather.weather[0].main }} ({{ currentWeather.weather[0].description | titlecase }})
+        <img [src]="'https://openweathermap.org/img/wn/' + currentWeather.weather[0].icon + '@2x.png'" 
+             alt="weather icon" class="weather-icon">
+      </div>
+    </div>
+
+    <!-- Temperature -->
+    <div class="weather-card">
+      <div class="card-key">Temperature</div>
+      <div class="card-value">
+        🌡️ {{ currentWeather.main.temp }} °C <br>
+        Feels like: {{ currentWeather.main.feels_like }} °C <br>
+        Min: {{ currentWeather.main.temp_min }} °C • Max: {{ currentWeather.main.temp_max }} °C
+      </div>
+    </div>
+
+    <!-- Humidity & Pressure -->
+    <div class="weather-card">
+      <div class="card-key">Humidity & Pressure</div>
+      <div class="card-value">
+        💧 Humidity: {{ currentWeather.main.humidity }} % <br>
+        📏 Pressure: {{ currentWeather.main.pressure }} hPa
+      </div>
+    </div>
+
+    <!-- Wind -->
+    <div class="weather-card">
+      <div class="card-key">Wind</div>
+      <div class="card-value">
+        💨 Speed: {{ currentWeather.wind.speed }} m/s <br>
+        Direction: {{ currentWeather.wind.deg }}° <br>
+        Gust: {{ currentWeather.wind.gust }} m/s
+      </div>
+    </div>
+
+    <!-- Clouds & Visibility -->
+    <div class="weather-card">
+      <div class="card-key">Clouds & Visibility</div>
+      <div class="card-value">
+        ☁️ Clouds: {{ currentWeather.clouds.all }} % <br>
+        👀 Visibility: {{ currentWeather.visibility / 1000 }} km
+      </div>
+    </div>
+
+    <!-- Rain -->
+    <div class="weather-card" *ngIf="currentWeather.rain">
+      <div class="card-key">Rain (last 1h)</div>
+      <div class="card-value">
+        🌧️ {{ currentWeather.rain['1h'] }} mm
+      </div>
+    </div>
+
+    <!-- Sunrise & Sunset -->
+    <div class="weather-card">
+      <div class="card-key">Sunrise & Sunset</div>
+      <div class="card-value">
+        🌅 Sunrise: {{ currentWeather.sys.sunrise * 1000 | date:'shortTime' }} <br>
+        🌇 Sunset: {{ currentWeather.sys.sunset * 1000 | date:'shortTime' }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="loading" *ngIf="loading">Loading current weather…</div>
+  <div class="error" *ngIf="error">{{ error }}</div>
+</ng-template>

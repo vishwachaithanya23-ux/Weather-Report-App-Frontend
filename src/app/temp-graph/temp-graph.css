@@ -1,0 +1,12 @@
+.graph-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 10px 0;
+}
+
+canvas {
+  width: 100% !important;
+  height: 260px !important;
+  display: block;
+}
